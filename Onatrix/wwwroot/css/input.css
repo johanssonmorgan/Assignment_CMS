@@ -16,9 +16,14 @@
     --color-note1: #9C9EA6;
     --color-border-gray: #EAEAEA;
     --color-border-400: #C7C8C9;
+    --font-poppins: 'Poppins', sans-serif;
     --text-rte-xl: 4.375rem;
     --text-rte-lg: 2.5rem;
     --text-rte-md: 1.25rem;
     --text-rte-sm: 1rem;
     --text-rte-xs: 0.875rem;
+}
+
+body {
+    @apply font-poppins;
 }
