@@ -9,6 +9,7 @@
       "Courier New", monospace;
     --default-font-family: var(--font-sans);
     --default-mono-font-family: var(--font-mono);
+    --font-poppins: 'Poppins', sans-serif;
   }
 }
 @layer base {
@@ -160,12 +161,18 @@
   }
 }
 @layer utilities {
+  .static {
+    position: static;
+  }
   .block {
     display: block;
   }
   .filter {
     filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
   }
+}
+body {
+  font-family: var(--font-poppins);
 }
 @property --tw-blur {
   syntax: "*";
