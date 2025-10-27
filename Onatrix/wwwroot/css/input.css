@@ -27,3 +27,7 @@
 body {
     @apply font-poppins;
 }
+
+.current a {
+    @apply text-secondary;
+}
