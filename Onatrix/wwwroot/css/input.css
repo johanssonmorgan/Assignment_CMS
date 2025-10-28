@@ -31,3 +31,7 @@ body {
 .current a {
     @apply text-secondary;
 }
+
+img {
+    @apply w-full h-auto object-cover;
+}
