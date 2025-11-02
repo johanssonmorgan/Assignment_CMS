@@ -1,0 +1,14 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+
+@{
+    var rootContent = Umbraco.ContentAtRoot();
+    var siteSettings = rootContent.OfType<SiteSettings>().FirstOrDefault();
+
+    var siteName = siteSettings?.SiteName ?? "OnatrixPlaceholder";
+}
+
+<footer class="bg-dark">
+    <div class="max-w-7xl mx-auto px-4 py-6">
+        <p class="text-[14px] text-primary">© @siteName. All Rights Reserved. Credits to <a href="#" class="text-secondary">Themesflat</a></p>
+    </div>
+</footer>
