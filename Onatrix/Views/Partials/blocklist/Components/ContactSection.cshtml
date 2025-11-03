@@ -1,0 +1,72 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+    var content = (ContentModels.ContactSection)Model.Content;
+
+    var settings = Model.Settings as ContentModels.ContactSettings;
+    var sectionColor = settings?.ContactBgColor?.Color ?? "#ffffff";
+
+    var rootContent = Umbraco.ContentAtRoot();
+    var siteSettings = rootContent.OfType<SiteSettings>().FirstOrDefault();
+
+    var contactAddress = siteSettings?.ContactAddress;
+    var contactPhone = siteSettings?.ContactPhone;
+    var contactEmail = siteSettings?.ContactEmail;
+
+    var contactImage = content.ContactImage;
+}
+
+<section style="background-color:@sectionColor">
+    <div class="max-w-7xl mx-auto pt-[2.3rem] flex">
+
+        <div class="grid place-items-end basis-1/2 bg-no-repeat
+                [background-image:url('/images/Background-shape.svg'),url('/images/Background-dots.svg')]
+                [background-position:right_bottom_-1px,right_3.8rem_bottom]
+">
+            @if (contactImage != null)
+            {
+                <img src="@contactImage.Url()" alt="Contact Info" class="mr-[7rem]" />
+            }
+        </div>
+
+        <div class="basis-1/2 grid place-items-center">
+            <div class="flex flex-col gap-8 p-[8rem] w-full">
+
+                @if (!string.IsNullOrWhiteSpace(content.ContactTitle))
+                {
+                    <h2 class="text-[2.5rem] text-primary font-bold leading-tight">@content.ContactTitle</h2>
+                }
+
+                <address class="not-italic flex flex-col gap-8">
+                    @if (!string.IsNullOrWhiteSpace(contactAddress))
+                    {
+                        <div class="grid grid-cols-[1.5rem_auto]">
+                            <i class="fa-solid fa-location-dot text-secondary text-base"></i>
+                            <p class="font-semibold text-sm text-dark col-start-2">@content.ContactLocationLabel</p>
+                            <p class="text-sm text-body-text col-start-2">@contactAddress</p>
+                        </div>
+                    }
+
+                    @if (!string.IsNullOrWhiteSpace(contactPhone))
+                    {
+                        <div class="grid grid-cols-[1.5rem_auto]">
+                            <i class="fa-solid fa-phone text-secondary text-base"></i>
+                            <p class="font-semibold text-sm text-dark col-start-2">@content.ContactPhoneLabel</p>
+                            <p class="text-sm text-body-text col-start-2">@contactPhone</p>
+                        </div>
+                    }
+                
+                    @if (!string.IsNullOrWhiteSpace(contactEmail))
+                    {
+                        <div class="grid grid-cols-[1.5rem_auto]">
+                            <i class="fa-solid fa-envelope text-secondary text-base"></i>
+                            <p class="font-semibold text-sm text-dark col-start-2">@content.ContactEmailLabel</p>
+                            <p class="text-sm text-body-text col-start-2">@contactEmail</p>
+                        </div>
+                    }
+                </address>
+            </div>
+        </div>
+
+    </div>
+</section>
