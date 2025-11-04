@@ -1,0 +1,39 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+    var content = (ContentModels.TestimonialSection)Model.Content;
+}
+
+<section class="bg-white-100 overflow-x-clip">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col gap-[1rem] lg:flex-row items-center">
+        <div class="grid place-items-center py-8 px-6 sm:px-10 basis-full lg:basis-1/2 text-center lg:text-left">
+            <div class="flex flex-col">
+                <p class="text-sm text-secondary font-bold">@content.TestimonialLabel</p>
+                <h2 class="text-2xl sm:text-3xl lg:text-[2.5rem] text-primary font-bold leading-tight pb-4 lg:w-3/4">@content.TestimonialTitle
+                </h2>
+                <p class="text-xl text-body-text-100 italic">@content.TestimonialText</p>
+                <div class="flex justify-center lg:justify-start gap-1 pt-4 pb-4">
+                    @for (int i = 0; i < 5; i++)
+                    {
+                        if (i < content.TestimonialRating)
+                        {
+                            <i class="fa-solid fa-star text-[#333333]"></i>
+                        }
+                        else
+                        {
+                            <i class="fa-regular fa-star text-[#333333]"></i>
+                        }
+                    }
+                </div>
+                <p class="text-sm text-[#2D303A] pb-2">@content.TestimonialUser</p>
+                <p class="text-xl text-[#2D303A] italic">@content.TestimonialCompany</p>
+            </div>
+        </div>
+        <div class="basis-full lg:basis-1/2 lg:ml-auto lg:-mr-[8rem] flex justify-center lg:justify-end">
+            @if (content.TestimonialImage != null)
+            {
+                <img src="@content.TestimonialImage.Url()" alt="@content.TestimonialImage.Name" class="w-full max-w-[40rem] aspect-[4/3] object-cover lg:object-contain" />
+            }
+        </div>
+    </div>
+</section>
