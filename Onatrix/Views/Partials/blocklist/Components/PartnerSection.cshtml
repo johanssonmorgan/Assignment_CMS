@@ -1,0 +1,67 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using Umbraco.Cms.Core.Models.Blocks;
+@using Umbraco.Cms.Core.Models.PublishedContent;
+
+@{
+    var content = (ContentModels.PartnerSection)Model.Content;
+    BlockListModel? partners = content.Partners;
+
+    string NormalizeUrl(string? raw)
+    {
+        if (string.IsNullOrWhiteSpace(raw)) return string.Empty;
+
+        var url = raw.Trim();
+
+        if (!url.StartsWith("http://") && !url.StartsWith("https://"))
+            url = "https://" + url;
+
+        return Uri.TryCreate(url, UriKind.Absolute, out var uriResult)
+            ? uriResult.ToString()
+            : string.Empty;
+    }
+}
+
+@if (partners != null && partners.Any())
+{
+    <section class="relative py-[2rem] isolate overflow-hidden hidden md:block">
+        <div class="max-w-7xl mx-auto px-[2rem]">
+            <ul class="grid md:grid-cols-4 lg:grid-cols-6 gap-6 items-center">
+                @{
+                    var index = 0;
+                }
+                @foreach (var item in partners.Take(6))
+                {
+                    var partner = (ContentModels.PartnerItem)item.Content;
+
+                    var logo = partner.PartnerLogo;
+                    if (logo == null) { continue; }
+
+                    var name = partner.PartnerName;
+                    var link = NormalizeUrl(partner.PartnerLink);
+                    var alt = string.IsNullOrWhiteSpace(name) ? "Partner logo" : name;
+
+                    index++;
+                    var visibilityClass = index > 4 ? "hidden lg:flex" : "flex";
+
+                    <li class="@($"justify-center items-center p-4 rounded-lg bg-neutral {visibilityClass}")">
+                        @if (!string.IsNullOrWhiteSpace(link))
+                        {
+                            <a href="@link" target="_blank" class="opacity-70 hover:opacity-100 transition grayscale hover:grayscale-0">
+                                <img src="@logo.Url()" alt="@alt"
+                                     class="max-h-12 h-auto object-contain"
+                                     loading="lazy" decoding="async" />
+                            </a>
+                        }
+                        else
+                        {
+                            <img src="@logo.Url()" alt="@alt"
+                                 class="max-h-12 h-auto object-contain opacity-70 hover:opacity-100 transition grayscale hover:grayscale-0"
+                                 loading="lazy" decoding="async" />
+                        }
+                    </li>
+                }
+            </ul>
+        </div>
+    </section>
+}
