@@ -1,0 +1,61 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+
+@{
+    var content = (ContentModels.SuccessSection)Model.Content;
+
+    var label = content.SuccessLabel;
+    var title = content.SuccessTitle;
+    var stats = content.SuccessStats;
+    var image = content.SuccessImage;
+}
+
+<section class="relative pt-[6.25rem]">
+    <div class="max-w-7xl mx-auto px-[2rem] text-center">
+        <div class="absolute inset-0 
+            h-[95%] sm:h-[90%] lg:h-[85%]
+            bg-primary
+            bg-no-repeat bg-center
+            [background-image:url('/images/success-bg.svg')]
+            [background-position-y:6rem]
+            [background-size:auto]
+            -z-10">
+        </div>
+        <div class="mb-2">
+            @if (!string.IsNullOrWhiteSpace(label))
+            {
+                <p class="text-sm font-semibold text-secondary uppercase mb-2">@label</p>
+            }
+            @if (!string.IsNullOrWhiteSpace(title))
+            {
+                <h2 class="text-[2.5rem] text-neutral font-bold">@title</h2>
+            }
+        </div>
+        <ul class="flex flex-col items-center gap-y-8 
+                   md:flex-row md:items-start md:justify-between md:flex-wrap">
+            @if (stats != null && stats.Any())
+            {
+                @foreach (var item in stats.Take(3))
+                {
+                    var stat = (ContentModels.SuccessStatItem)item.Content;
+
+                    var statValue = stat.StatValue;
+                    var statLabel = stat.StatLabel;
+
+                    <li class="flex flex-col items-center max-w-[370px] w-full md:w-[30%]">
+                        <p class="text-[6.25rem] text-secondary font-semibold">@statValue</p>
+                        <p class="text-lg text-neutral font-semibold">@statLabel</p>
+                    </li>
+                }
+            }
+        </ul>
+        @if (image != null)
+        {
+            <div class="mt-10">
+                <img src="@image.Url()" alt="@image.Name" 
+                class="mx-auto max-w-full h-auto object-contain"
+                loading="lazy" decoding="async" />
+            </div>
+        }
+    </div>
+</section>
