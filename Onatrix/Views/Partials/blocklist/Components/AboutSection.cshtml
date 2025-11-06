@@ -1,0 +1,35 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+    var content = (ContentModels.AboutSection)Model.Content;
+
+    var image = content.AboutImage;
+    var caption = content.AboutCaption;
+    var aboutRte = content.AboutText;
+    var alt = !string.IsNullOrWhiteSpace(caption)
+        ? caption 
+        : (image != null ? image.Name : "About image");
+}
+
+<section class="py-[3rem] md:py-[6.25rem]">
+    <div class="max-w-7xl mx-auto px-[2rem] flex flex-col-reverse md:flex-row md:items-start lg:items-center gap-10">
+        <div class="flex flex-col gap-1 basis-1/4 shrink-0">
+            <img 
+                src="@image?.Url()" 
+                alt="@alt"
+                class="w-full h-auto object-cover"
+                loading="lazy" decoding="async" />
+
+            @if (!string.IsNullOrWhiteSpace(caption))
+            {
+                <p class="text-primary italic">@caption</p>
+            }
+        </div>
+        @if (aboutRte != null)
+        {
+            <div class="md:basis-3/4 md:min-w-0">
+                <div class="rte">@aboutRte</div>
+            </div>
+        }
+    </div>
+</section>
