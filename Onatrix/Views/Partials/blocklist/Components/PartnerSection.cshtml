@@ -1,11 +1,9 @@
 ﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>
 @using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
-@using Umbraco.Cms.Core.Models.Blocks;
-@using Umbraco.Cms.Core.Models.PublishedContent;
 
 @{
     var content = (ContentModels.PartnerSection)Model.Content;
-    BlockListModel? partners = content.Partners;
+    var partners = content.Partners;
 
     string NormalizeUrl(string? raw)
     {
@@ -39,7 +37,7 @@
 
                     var name = partner.PartnerName;
                     var link = NormalizeUrl(partner.PartnerLink);
-                    var alt = string.IsNullOrWhiteSpace(name) ? "Partner logo" : name;
+                    var alt = !string.IsNullOrWhiteSpace(name) ? name : "Partner logo";
 
                     index++;
                     var visibilityClass = index > 4 ? "hidden lg:flex" : "flex";
