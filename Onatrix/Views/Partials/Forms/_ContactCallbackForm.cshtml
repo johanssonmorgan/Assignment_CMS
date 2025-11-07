@@ -3,7 +3,7 @@
 
 @using (Html.BeginUmbracoForm("HandleCallbackForm", "Form", FormMethod.Post, new { novalidate = "novalidate", id = "callbackForm" }))
 {
-    <div class="px-[2rem] flex flex-col gap-6">
+    <div class="px-[2rem] grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
 
 
         <div>
@@ -13,17 +13,16 @@
         </div>
 
         <div>
-            <label asp-for="Email" class="sr-only"></label>
-            <input asp-for="Email" type="text" placeholder="@Html.DisplayNameFor(x => x.Email)" class="w-full p-3 italic border border-gray-300 focus:ring-2 focus:ring-primary focus:outline-none" />
-            <span asp-validation-for="Email"></span>
-        </div>
-
-        <div>
             <label asp-for="Phone" class="sr-only"></label>
             <input asp-for="Phone" type="text" placeholder="@Html.DisplayNameFor(x => x.Phone)" class="w-full p-3 italic border border-gray-300 focus:ring-2 focus:ring-primary focus:outline-none" />
             <span asp-validation-for="Phone"></span>
         </div>
 
+        <div>
+            <label asp-for="Email" class="sr-only"></label>
+            <input asp-for="Email" type="text" placeholder="@Html.DisplayNameFor(x => x.Email)" class="w-full p-3 italic border border-gray-300 focus:ring-2 focus:ring-primary focus:outline-none" />
+            <span asp-validation-for="Email"></span>
+        </div>
 
         <div>
 
@@ -56,8 +55,8 @@
 
         </div>
 
-        <div class="pb-[2.5rem]">
-            <button type="submit" class="form-btn">Submit</button>
+        <div class="pb-[2.5rem] md:col-span-2 flex justify-center md:block md:mx-auto">
+            <button type="submit" class="contact-form-btn">Submit</button>
         </div>
 
     </div>
