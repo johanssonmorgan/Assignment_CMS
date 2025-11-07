@@ -1,0 +1,50 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using Onatrix.ViewModels
+@{
+    var content = (ContentModels.ContactCallbackSection)Model.Content;
+    var label = content.ContactCallbackFormLabel;
+    var title = content.ContactCallbackFormTitle;
+    var description = content.ContactCallbackFormDescription;
+
+    var settings = Model.Settings as ContentModels.AboutCallbackSettings;
+
+    var formViewModel = new CallbackFormViewModel
+    {
+        Options = settings?.CallbackRequestOptions ?? []
+    };
+
+}
+
+<section class="pb-8 md:pb-0 bg-no-repeat
+             [background-image:url('/images/contact-form-bg.svg')]
+             [background-position:top]
+             [background-size:auto]">
+    <div class="max-w-7xl mx-auto px-[2rem] pt-[7rem] md:pt-[12rem] lg:pt-[18.5rem]">
+
+        <div class="w-9/10 mx-auto shadow-md bg-neutral text-center md:pb-[2.3rem]">
+
+            <div class="pt-[2rem] md:pt-[4rem] flex flex-col w-[90%] md:w-[70%] lg:w-[50%] mx-auto mb-8">
+                <p class="text-sm text-secondary font-bold uppercase">@label</p>
+                <h2 class="text-2xl md:text-[2.5rem] text-primary font-bold mb-4">@title</h2>
+                <p class="text-base md:text-sm text-body-text italic">@description</p>
+            </div>
+
+            <partial name="Partials/Forms/_ContactCallbackForm" model="formViewModel" />
+
+            @if (TempData["FormSuccess"] != null)
+            {
+                <div class="bg-green-50 text-green-700 p-4 mx-[2rem] mb-4 rounded-md">
+                    @TempData["FormSuccess"]
+                </div>
+            }
+            else if (TempData["FormError"] != null)
+            {
+                <div class="bg-red-50 text-red-700 p-4 mx-[2rem] mb-4 rounded-md">
+                    @TempData["FormError"]
+                </div>
+            }
+
+        </div>
+    </div>
+</section>
