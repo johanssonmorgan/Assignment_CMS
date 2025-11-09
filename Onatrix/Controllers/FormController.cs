@@ -32,5 +32,22 @@ namespace Onatrix.Controllers
             TempData["FormSuccess"] = "Thank you for your request. We will get back to you shortly.";
             return RedirectToCurrentUmbracoPage();
         }
+        public IActionResult HandleEmailForm(EmailFormViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return CurrentUmbracoPage();
+            }
+
+            var result = _formSubmissions.SaveEmailRequest(model);
+            if (!result)
+            {
+                TempData["FormError"] = "There was an error submitting the form. Please try again.";
+                return RedirectToCurrentUmbracoPage();
+            }
+
+            TempData["FormSuccess"] = "Thank you for your request. We will get back to you shortly.";
+            return RedirectToCurrentUmbracoPage();
+        }
     }
 }
