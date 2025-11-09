@@ -1,0 +1,19 @@
+﻿@using Onatrix.ViewModels
+@model EmailFormViewModel
+
+@using (Html.BeginUmbracoForm("HandleEmailForm", "Form", FormMethod.Post, new { novalidate = "novalidate", id = "emailForm" }))
+{
+    <div class="flex flex-col gap-6">
+
+        <label asp-for="Email" class="sr-only"></label>
+        <div class="relative">
+            <input asp-for="Email" type="text" placeholder="@Html.DisplayNameFor(x => x.Email)" class="w-full p-3 pr-10 italic border border-gray-300 focus:ring-2 focus:ring-primary focus:outline-none text-notel bg-neutral rounded" />
+
+            <span class="pointer-events-none absolute inset-y-0 right-3 grid place-items-center">
+                <i class="fa-regular fa-envelope text-primary"></i>
+            </span>
+        </div>
+        <span asp-validation-for="Email"></span>
+
+    </div>
+}
