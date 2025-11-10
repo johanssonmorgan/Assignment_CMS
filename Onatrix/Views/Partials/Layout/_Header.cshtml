@@ -24,25 +24,23 @@
     var selection = Model.Root().Children().Where(x => x.IsVisible(PublishedValueFallback)).ToArray();
 }
 
-<header class="relative shadow-sm z-[999]">
-    <nav class="max-w-7xl mx-auto flex items-center justify-between p-4 px-[2rem]">
+<header class="relative shadow-sm bg-neutral z-[999]">
+    <nav class="max-w-7xl mx-auto px-[2rem] py-4 flex items-center justify-between">
 
-        @if (logo != null)
-        {
-            <a href="/" class="flex-shrink-0">
-                <img src="@logo.Url()" alt="Onatrix">
-            </a>
-        }
-        else
-        {
-            <a href="/" class="flex-shrink-0">
-                Onatrix
-            </a>
-        }
+        <a href="/" class="shrink-0 min-w-0">
+            @if (logo != null)
+            {
+                <img src="@logo.Url()" alt="Onatrix" class="h-8 w-auto" />
+            }
+            else
+            {
+                <span class="font-bold text-primary">Onatrix</span>
+            }
+        </a>
 
         @if (selection?.Length > 0)
         {
-            <ul class="flex items-center gap-16">
+            <ul class="hidden md:flex items-center gap-16">
                 @foreach (var item in selection)
                 {
                     <li class="@(item.IsAncestorOrSelf(Model) ? "current" : null)">
@@ -52,9 +50,43 @@
             </ul>
         }
 
-        <div class="flex items-center">
-            <i class="fa-solid fa-magnifying-glass text-lg text-primary"></i>
-        </div>
+        <div class="flex items-center gap-3 shrink-0">
+            <button type="button" class="hidden md:inline-flex items-center justify-center h-10 w-10 cursor-pointer" aria-label="Search">
+                <i class="fa-solid fa-magnifying-glass text-lg text-primary"></i>
+            </button>
 
+            <button id="navToggle"
+                    class="md:hidden text-primary text-2xl focus:outline-none"
+                    aria-expanded="false"
+                    aria-label="Open menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
     </nav>
+
+    <div id="mobileNav"
+         class="fixed inset-0 hidden bg-neutral z-[1100] flex flex-col items-center justify-center text-center gap-10 px-6 opacity-0 transition-opacity duration-300">
+
+        <button id="closeNav" class="absolute top-6 right-6 text-primary text-3xl focus:outline-none">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <ul class="flex flex-col gap-2">
+            @if (selection?.Length > 0)
+            {
+                @foreach (var item in selection)
+                {
+                    <li class="@(item.IsAncestorOrSelf(Model) ? "current" : null) py-2">
+                        <a href="@item.Url(PublishedUrlProvider)" class="text-2xl font-bold text-primary hover:text-secondary transition-colors">@item.Name</a>
+                    </li>
+                }
+            }
+            <li>
+                <button type="button" class="inline-flex items-center gap-2 py-2 text-2xl text-primary hover:text-secondary">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <span class="font-bold">Search</span>
+                </button>
+            </li>
+        </ul>
+    </div>
 </header>
