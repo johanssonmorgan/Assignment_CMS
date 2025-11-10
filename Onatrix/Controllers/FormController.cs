@@ -25,11 +25,11 @@ namespace Onatrix.Controllers
             var result = _formSubmissions.SaveCallbackRequest(model);
             if (!result)
             {
-                TempData["FormError"] = "There was an error submitting the form. Please try again.";
+                TempData["CallbackFormError"] = "There was an error submitting the form. Please try again.";
                 return RedirectToCurrentUmbracoPage();
             }
 
-            TempData["FormSuccess"] = "Thank you for your request. We will get back to you shortly.";
+            TempData["CallbackFormSuccess"] = "Thank you for your request. We will get back to you shortly.";
             return RedirectToCurrentUmbracoPage();
         }
         public IActionResult HandleEmailForm(EmailFormViewModel model)
@@ -42,11 +42,28 @@ namespace Onatrix.Controllers
             var result = _formSubmissions.SaveEmailRequest(model);
             if (!result)
             {
-                TempData["FormError"] = "There was an error submitting the form. Please try again.";
+                TempData["EmailFormError"] = "There was an error submitting the form. Please try again.";
                 return RedirectToCurrentUmbracoPage();
             }
 
-            TempData["FormSuccess"] = "Thank you for your request. We will get back to you shortly.";
+            TempData["EmailFormSuccess"] = "Thank you for your request. We will get back to you shortly.";
+            return RedirectToCurrentUmbracoPage();
+        }
+        public IActionResult HandleQuestionForm(QuestionFormViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return CurrentUmbracoPage();
+            }
+
+            var result = _formSubmissions.SaveQuestionRequest(model);
+            if (!result)
+            {
+                TempData["QuestionFormError"] = "There was an error submitting the form. Please try again.";
+                return RedirectToCurrentUmbracoPage();
+            }
+
+            TempData["QuestionFormSuccess"] = "Thank you for your question. We will get back to you shortly.";
             return RedirectToCurrentUmbracoPage();
         }
     }

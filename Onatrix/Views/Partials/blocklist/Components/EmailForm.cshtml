@@ -16,16 +16,16 @@
 
     <partial name="Partials/Forms/_EmailForm" model="formViewModel" />
 
-    @if (TempData["FormSuccess"] != null)
+    @if (TempData["EmailFormSuccess"] != null)
     {
         <div class="bg-green-50 text-green-700 p-4 rounded">
-            @TempData["FormSuccess"]
+            @TempData["EmailFormSuccess"]
         </div>
     }
-    else if (TempData["FormError"] != null)
+    else if (TempData["EmailFormError"] != null)
     {
         <div class="bg-red-50 text-red-700 p-4 rounded">
-            @TempData["FormError"]
+            @TempData["EmailFormError"]
         </div>
     }
 </div>

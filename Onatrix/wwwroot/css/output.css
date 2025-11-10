@@ -436,6 +436,9 @@
   .cursor-pointer {
     cursor: pointer;
   }
+  .resize-none {
+    resize: none;
+  }
   .appearance-none {
     appearance: none;
   }
@@ -772,6 +775,9 @@
   .text-\[1\.875rem\] {
     font-size: 1.875rem;
   }
+  .text-\[1\.5625rem\] {
+    font-size: 1.5625rem;
+  }
   .text-\[2\.5rem\] {
     font-size: 2.5rem;
   }
@@ -1009,6 +1015,11 @@
       margin-inline: auto;
     }
   }
+  .md\:mr-auto {
+    @media (width >= 48rem) {
+      margin-right: auto;
+    }
+  }
   .md\:block {
     @media (width >= 48rem) {
       display: block;
@@ -1072,6 +1083,11 @@
   .md\:gap-6 {
     @media (width >= 48rem) {
       gap: calc(var(--spacing) * 6);
+    }
+  }
+  .md\:py-\[4rem\] {
+    @media (width >= 48rem) {
+      padding-block: 4rem;
     }
   }
   .md\:py-\[6\.25rem\] {
@@ -1231,6 +1247,21 @@
   width: 100%;
   cursor: pointer;
   border-radius: var(--radius-md);
+  background-color: var(--color-primary);
+  padding-inline: calc(var(--spacing) * 12);
+  padding-block: calc(var(--spacing) * 3);
+  text-align: center;
+  font-size: 1.125rem;
+  --tw-font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-white);
+  -webkit-user-select: none;
+  user-select: none;
+}
+.question-form-btn {
+  width: 100%;
+  cursor: pointer;
+  border-radius: 0.25rem;
   background-color: var(--color-primary);
   padding-inline: calc(var(--spacing) * 12);
   padding-block: calc(var(--spacing) * 3);
