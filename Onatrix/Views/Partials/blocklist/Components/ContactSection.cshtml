@@ -18,27 +18,27 @@
 
 <section style="background-color:@sectionColor">
 
-    <div class="max-w-7xl mx-auto pt-[2.3rem] px-[2rem] flex">
+    <div class="max-w-7xl mx-auto pt-[2.3rem] px-[2rem] grid grid-cols-1 md:grid-cols-2">
 
-        <div class="grid place-items-end basis-1/2 bg-no-repeat
-                [background-image:url('/images/Background-shape.svg'),url('/images/Background-dots.svg')]
-                [background-position:right_bottom_-1px,right_3.8rem_bottom]
-">
+        <div class="order-2 md:order-1 hidden md:grid place-items-end bg-no-repeat
+                md:[background-image:url('/images/Background-shape.svg'),url('/images/Background-dots.svg')]
+                md:[background-position:right_bottom_-1px,right_3.8rem_bottom]">
+
             @if (contactImage != null)
             {
                 <img src="@contactImage.Url()" alt="Contact Info" class="mr-[7rem]" />
             }
         </div>
 
-        <div class="basis-1/2 grid place-items-center">
-            <div class="flex flex-col gap-8 p-[8rem] w-full">
+        <div class="order-1 md:order-2">
+            <div class="space-y-8 p-0 pb-[2.3rem] md:py-[6rem] lg:p-[8rem] w-full">
 
                 @if (!string.IsNullOrWhiteSpace(content.ContactTitle))
                 {
-                    <h2 class="text-[2.5rem] text-primary font-bold leading-tight">@content.ContactTitle</h2>
+                    <h2 class="text-[1.5rem] md:text-[2.2rem] lg:text-[2.5rem] text-primary font-bold leading-tight">@content.ContactTitle</h2>
                 }
 
-                <address class="not-italic flex flex-col gap-8">
+                <address class="not-italic space-y-8">
                     @if (!string.IsNullOrWhiteSpace(contactAddress))
                     {
                         <div class="grid grid-cols-[1.5rem_auto]">
@@ -52,8 +52,12 @@
                     {
                         <div class="grid grid-cols-[1.5rem_auto]">
                             <i class="fa-solid fa-phone text-secondary text-base"></i>
-                            <p class="font-semibold text-sm text-dark col-start-2">@content.ContactPhoneLabel</p>
-                            <p class="text-sm text-body-text col-start-2">@contactPhone</p>
+                            <div class="col-start-2">
+                                <p class="font-semibold text-sm text-dark col-start-2">@content.ContactPhoneLabel</p>
+                                <p class="text-sm text-body-text col-start-2">
+                                    <a href="tel:@contactPhone" class="hover:underline">@contactPhone</a>
+                                </p>
+                            </div>
                         </div>
                     }
                 
@@ -61,8 +65,12 @@
                     {
                         <div class="grid grid-cols-[1.5rem_auto]">
                             <i class="fa-solid fa-envelope text-secondary text-base"></i>
-                            <p class="font-semibold text-sm text-dark col-start-2">@content.ContactEmailLabel</p>
-                            <p class="text-sm text-body-text col-start-2">@contactEmail</p>
+                            <div class="col-start-2">
+                                <p class="font-semibold text-sm text-dark">@content.ContactEmailLabel</p>
+                                <p class="text-sm text-body-text">
+                                    <a href="mailto:@contactEmail" class="hover:underline">@contactEmail</a>
+                                </p>
+                            </div>
                         </div>
                     }
                 </address>
