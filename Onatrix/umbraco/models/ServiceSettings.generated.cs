@@ -63,5 +63,12 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "16.2.0+4eae48e")]
 		[ImplementPropertyType("showServiceLabel")]
 		public virtual bool ShowServiceLabel => this.Value<bool>(_publishedValueFallback, "showServiceLabel");
+
+		///<summary>
+		/// Show Pagination
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "16.2.0+4eae48e")]
+		[ImplementPropertyType("showServicePagination")]
+		public virtual bool ShowServicePagination => this.Value<bool>(_publishedValueFallback, "showServicePagination");
 	}
 }
