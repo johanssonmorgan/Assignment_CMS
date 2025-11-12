@@ -22,33 +22,45 @@
 
             @if (settings!.ShowServiceLabel)
             {
-                <h2 class="text-[.875rem] text-secondary font-bold uppercase">@content.ServiceLabel</h2>
+                <h2 class="mb-12 md:mb-0 text-[.875rem] text-secondary font-bold uppercase">@content.ServiceLabel</h2>
             }
 
-            <div class="rte">@Html.Raw(content.ServiceTitle)</div>
+            <div class="hidden md:block rte">@Html.Raw(content.ServiceTitle)</div>
         </div>
 
-        <div class="mt-5 grid grid-cols-3 gap-4">
+        @if (items.Any())
+        {
+            <div class="swiper service-swiper !-mx-[2rem] md:!mx-0">
+                <div class="swiper-wrapper">
 
-            @if (items.Any())
-            {
-                @foreach (var item in items)
+                    @foreach (var item in items)
+                    {
+                        <div class="swiper-slide bg-neutral border-2 border-white-100 w-full min-h-[350px] overflow-hidden transition-all hover:border-secondary hover:shadow-[0_4px_15px_rgba(0,0,0,0.1)]">
+                            <a href="@item.Url()" class="block no-underline">
+                                <h4 class="p-[1.5rem] font-semibold text-primary">@item.Name</h4>
+                                <img src="@(item.ServiceDetailThumbnail?.Url() ?? "~/images/service-fallback.svg")" alt="@item.Name Icon" class="block w-full h-[220px] object-cover" />
+                                <p class="text-sm p-[1.5rem]">@item.ServiceDetailExcerpt</p>
+                            </a>
+                        </div>
+                    }
+
+                </div>
+                
+                @if (settings!.ShowServicePagination)
                 {
-                    <div class="bg-neutral border-2 border-white-100 w-full min-h-[350px] overflow-hidden transition-all hover:border-secondary hover:shadow-[0_4px_15px_rgba(0,0,0,0.1)]">
-                        <a href="@item.Url()" class="block no-underline">
-                            <h4 class="p-[1.5rem] font-semibold text-primary">@item.Name</h4>
-                            <img src="@(item.ServiceDetailThumbnail?.Url() ?? "~/images/service-fallback.svg")" alt="@item.Name Icon" class="block w-full h-[220px] object-cover" />
-                            <p class="text-sm p-[1.5rem]">@item.ServiceDetailExcerpt</p>
-                        </a>
+                    <div class="custom-pagination">
+                        <div class="custom-prev">Prev</div>
+                        <div class="swiper-pagination"></div>
+                        <div class="custom-next">Next</div>
                     </div>
                 }
-            }
-            else
-            {
-                <p>No services available at the moment.</p>
-            }
 
+            </div>
+        }
+        else
+        {
+            <p>No services available at the moment.</p>
+        }
 
-        </div>
     </div>
 </section>

@@ -1,6 +1,7 @@
 ﻿@import "tailwindcss";
 @import "./forms.css";
 @import "./rte.css";
+@import "./swiper.css";
 
 
 @theme {
