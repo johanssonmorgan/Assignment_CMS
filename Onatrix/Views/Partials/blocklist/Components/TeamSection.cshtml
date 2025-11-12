@@ -5,14 +5,14 @@
     var teamList = content.TeamMemberList;
 }
 
-<section class="py-[4rem] bg-neutral">
+<section class="py-[2rem] md:py-[4rem] bg-neutral">
     <div class="max-w-7xl mx-auto px-[3rem]">
         <div class="flex flex-col items-center">
             <h2 class="text-[.875rem] text-secondary font-bold uppercase">@content.TeamLabel</h2>
             <div class="rte">@Html.Raw(@content.TeamTitle)</div>
         </div>
 
-        <div class="flex flex-wrap gap-y-5 pt-5 pb-5 -mx-2">
+        <div class="hidden md:flex flex-wrap gap-y-5 pt-5 pb-5 -mx-2">
             @if (teamList != null)
             {
                 for (var i = 0; i < teamList.Count; i++)
@@ -25,6 +25,22 @@
                     </div>
                 }
             }
+        </div>
+
+        <div class="mt-[2rem] md:hidden">
+            <div class="swiper team-swiper !-mx-[3rem]">
+                <div class="swiper-wrapper">
+                    @if (teamList != null)
+                    {
+                        foreach (var member in teamList)
+                        {
+                            <div class="swiper-slide">
+                                <partial name="Partials/Blocklist/Components/TeamMember" model="member" />
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
         </div>
 
     </div>
