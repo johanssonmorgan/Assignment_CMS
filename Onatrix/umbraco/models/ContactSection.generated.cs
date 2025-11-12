@@ -88,13 +88,5 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		[ImplementPropertyType("contactTitle")]
 		public virtual string ContactTitle => this.Value<string>(_publishedValueFallback, "contactTitle");
-
-		///<summary>
-		/// Partner Strip
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "16.2.0+4eae48e")]
-		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("partnerStrip")]
-		public virtual global::Umbraco.Cms.Core.Models.Blocks.BlockListModel PartnerStrip => this.Value<global::Umbraco.Cms.Core.Models.Blocks.BlockListModel>(_publishedValueFallback, "partnerStrip");
 	}
 }
